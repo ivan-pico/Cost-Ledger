@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Economía Familiar"
+description = "Una aplicación privada y local para registrar gastos e ingresos familiares, revisar análisis por periodo y gestionar copias de seguridad exportables."
+version = "1.0.0"
+id = "artifacts/economia-familiar"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18584
+
+[services.development]
+run = "pnpm --filter @workspace/economia-familiar run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/economia-familiar", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/economia-familiar/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18584"
+BASE_PATH = "/"
