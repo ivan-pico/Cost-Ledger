@@ -5,27 +5,18 @@ import { defineConfig } from 'vite';
 
 import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
 
+// PORT is only needed by the dev/preview server (Replit always sets it).
+// If missing (e.g. a plain `vite build`), Vite falls back to its default port.
 const rawPort = process.env.PORT;
+const port = rawPort ? Number(rawPort) : undefined;
 
-if (!rawPort) {
-  throw new Error(
-    'PORT environment variable is required but was not provided.',
-  );
-}
-
-const port = Number(rawPort);
-
-if (Number.isNaN(port) || port <= 0) {
+if (port !== undefined && (Number.isNaN(port) || port <= 0)) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-const basePath = process.env.BASE_PATH;
-
-if (!basePath) {
-  throw new Error(
-    'BASE_PATH environment variable is required but was not provided.',
-  );
-}
+// Default base for the production deploy at https://viajarconcamper.com/cost-ledger/.
+// Replit (or anyone) can still override it by setting BASE_PATH.
+const basePath = process.env.BASE_PATH || '/cost-ledger/';
 
 export default defineConfig({
   base: basePath,
