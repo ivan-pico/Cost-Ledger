@@ -14,9 +14,9 @@ if (port !== undefined && (Number.isNaN(port) || port <= 0)) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-// Default base for the production deploy at https://viajarconcamper.com/cost-ledger/.
+// Default base for the production deploy at https://cost-ledger.gohan.cat/ (domain root).
 // Replit (or anyone) can still override it by setting BASE_PATH.
-const basePath = process.env.BASE_PATH || '/cost-ledger/';
+const basePath = process.env.BASE_PATH || '/';
 
 export default defineConfig({
   base: basePath,
