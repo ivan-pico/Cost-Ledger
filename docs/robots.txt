@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://cost-ledger.gohan.cat/sitemap.xml

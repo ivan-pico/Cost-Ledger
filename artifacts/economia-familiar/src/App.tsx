@@ -100,9 +100,20 @@ function App(){
         <Route><NotFound/></Route>
       </Switch>}
     </main>
+    <AuthorFooter withNav={!!user&&path!=='/'}/>
     {deleted&&path==='/dashboard'&&<div className="toast" role="status" style={{position:'fixed',zIndex:30,bottom:82,left:'50%',transform:'translateX(-50%)',background:'#263f35',color:'#fff',padding:'13px 16px',borderRadius:14,display:'flex',alignItems:'center',gap:14,boxShadow:'0 10px 40px #16332935'}}><span>Movimiento eliminado</span><button className="button" style={{minHeight:36,padding:'0 12px',background:'#e9c7a9',color:'#273d34'}} onClick={undoDelete} data-testid="button-undo-delete">Deshacer</button></div>}
     {notice&&<div className="toast" role="status" data-testid="status-notice" style={{position:'fixed',zIndex:80,right:18,bottom:90,maxWidth:'calc(100vw - 36px)',background:notice.kind==='error'?'#8a3329':'#284d3e',color:'white',padding:'14px 18px',borderRadius:14,boxShadow:'0 12px 34px #18352c33'}}>{notice.text}</div>}
   </div>;
+}
+
+function AuthorFooter({withNav}:{withNav:boolean}){
+  return <footer className={`author-footer${withNav?' author-footer-nav':''}`} data-testid="footer-author" style={{maxWidth:1160,margin:'0 auto',padding:'14px 25px 22px',display:'flex',justifyContent:'center',alignItems:'center',gap:'6px 14px',flexWrap:'wrap',fontSize:12,color:'#7e847b'}}>
+    <span>Hecho por <a href="https://ivanpico.com" target="_blank" rel="me noopener" data-testid="link-author">Ivan Picó</a></span>
+    <span aria-hidden="true" style={{color:'#c9c3b3'}}>·</span>
+    <a href="https://www.linkedin.com/in/ivanpico" target="_blank" rel="me noopener" data-testid="link-linkedin">LinkedIn</a>
+    <span aria-hidden="true" style={{color:'#c9c3b3'}}>·</span>
+    <a href="https://gohan.cat/" target="_blank" rel="noopener" data-testid="link-gohan">Más proyectos en gohan.cat</a>
+  </footer>;
 }
 
 function Navigation({path,alias,logout}:{path:string;alias:string;logout:()=>void}){
@@ -133,7 +144,7 @@ function Navigation({path,alias,logout}:{path:string;alias:string;logout:()=>voi
 function Welcome({onLogin}:{onLogin:(alias:string,email:string,create:boolean)=>void}){
   const [mode,setMode]=useState<'inicio'|'crear'|'acceder'>('inicio'),[alias,setAlias]=useState(''),[email,setEmail]=useState('');
   const submit=(e:FormEvent)=>{e.preventDefault();onLogin(alias,email,mode==='crear');};
-  return <div style={{maxWidth:1160,margin:'0 auto',padding:'24px 25px 56px'}}>
+  return <div style={{maxWidth:1160,margin:'0 auto',padding:'24px 25px 20px'}}>
     <header style={{display:'flex',alignItems:'center',justifyContent:'space-between',height:60}}>
       <div style={{display:'flex',alignItems:'center',gap:10}}><span style={{width:34,height:34,display:'grid',placeItems:'center',borderRadius:12,background:'#285b49',color:'#f4ecda'}}><Wallet size={18}/></span><span className="display" style={{fontWeight:800,fontSize:18}}>Casa en orden</span></div>
       <span className="eyebrow" style={{letterSpacing:'.11em'}}>Tu economía, en casa</span>

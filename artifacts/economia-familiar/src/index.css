@@ -87,8 +87,11 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 859px) {
   .desktop-nav { display:none !important; }
   .mobile-nav { display:flex; }
-  .content-wrap { padding-bottom:100px !important; }
+  .content-wrap { padding-bottom:24px !important; }
+  .author-footer-nav { padding-bottom:100px !important; }
 }
 @media (max-width: 560px) {
   .modal { padding:20px; border-radius:20px; }
 }
+.author-footer a { color:#4f6a5d; font-weight:700; text-decoration:underline; text-decoration-color:#d1886399; text-underline-offset:3px; }
+.author-footer a:hover, .author-footer a:focus-visible { color:hsl(var(--primary)); text-decoration-color:currentColor; }
